@@ -82,6 +82,7 @@ fs.readFile('swears.txt', (err, data) => {
 					}).catch(err => console.error);
 				}, 1000);
 
+				swears[swearIndex].pageNumber += 1;
 			}).catch(err => console.error);
 		}
 	}, 2000)

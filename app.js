@@ -29,7 +29,7 @@ fs.readFile('swears.txt', (err, data) => {
 	}
 
 	// Search API requests are limited to 30 per minute.
-	// A request is performed every two seconds (totalling 30 requests per minute) to meet the requirements.
+	// A request is performed every two seconds (totaling 30 requests per minute) to meet the requirements.
 	const rateLimiter = setInterval(() => {
 		if(swearIndex > swears.length) {
 			clearInterval(rateLimiter);
@@ -54,7 +54,7 @@ fs.readFile('swears.txt', (err, data) => {
 				let codeIndex = 0;
 
 				// Regular API requests are limited to 5,000 per hour, so around 83 per minute.
-				// A request is performed every second (totalling 60 requests per minute) to meet the requirements.
+				// A request is performed every second (totaling 60 requests per minute) to meet the requirements.
 				// Although this could be performed faster, it is kept at a lower rate to account for potential variablity in timing.
 				const contentRateLimiter = setInterval(() => {
 					if(codeIndex > code.length) {

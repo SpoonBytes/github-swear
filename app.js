@@ -12,70 +12,144 @@ github.authenticate({
 	password: credentials.password
 });
 
-const languages = {};
-
-const swearsList = fs.readFileSync('swears.txt').toString().split("\n");
-const swears = [];
-let swear;
-let swearIndex = 0;
-for(swear of swearsList) {
-	swears.push({
-		word: swear,
-		pages: null,
-		pageNumber: 1,
-		files: []
-	});
+const languages = fs.readFileSync("languages.txt").toString().split("\n");
+const swears = fs.readFileSync("swears.txt").toString().split("\n");
+const baseQueue = [];
+const pageQueue = [];
+const contentQueue = [];
+const results = {};
+for(swear of swears) {
+	for(language of languages) {
+		baseQueue.push({
+			word: swear.replace("\r", ""),
+			language: language
+		});
+	}
 }
 
-console.log(`Beginning search for swear word "${swears[swearIndex].word}" on page 1."`);
+console.log(`Searching will begin now.`);
 
-// Search API requests are limited to 30 per minute.
-// A request is performed every two seconds (totaling 30 requests per minute) to meet the requirements.
-const rateLimiter = setInterval(() => {
-	if(swearIndex >= swears.length) {
-		clearInterval(rateLimiter);
-		return;
+// GitHub Search API requests are limited to 30 per minute.
+// Therefore, the baseTimer is run every 4 seconds and pageTimer is run every 4 seconds.
+// This makes a total of 30 API requests per minute.
+
+const baseTimer = setInterval(() => {
+	if(baseQueue.length) {
+		const query = baseQueue[0];
+		baseQueue.shift();
+
+		console.log(`Beginning search for ${query.language} files containing "${query.word}" on page 1.`);
+
+		github.search.code({
+			q: `${query.word} in:file language:${query.language}`,
+			per_page: 100,
+			page: 1
+		}).then(result => {
+			if(result.meta.link && Number(result.meta.link.split(";")[0].split("&page=")[1].split("&")[0])) {
+				const nextPage = Number(result.meta.link.split(";")[0].split("&page=")[1].split("&")[0]); // Hacky, but works.
+				pageQueue.push({
+					word: query.word,
+					language: query.language,
+					nextPage: nextPage
+				});
+			}
+
+			for(file of result.data.items) {
+				contentQueue.push({
+					word: query.word,
+					language: query.language,
+					repo: file.repository.name,
+					owner: file.repository.owner.login,
+					path: file.path
+				});
+			}
+		}).catch(err => {
+			if(err.message.includes("abuse detection mechanism")) {
+				console.log("GitHub API rate limit was exceeded. Requeuing query to search again later.")
+				baseQueue.unshift(query);
+			} else console.log(err);
+		});
 	}
+}, 4000);
 
-	swear = swears[swearIndex];
-	github.search.code({
-		q: swear.word + " in:file",
-		page: swear.pageNumber,
-		per_page: 100
-	}).then(result => {
-		if(!swears[swearIndex].pages) {
-			const pages = Number(result.meta.link.split(",")[1].split("&page=")[1].split("&")[0]); // Hacky, but works.
-			swears[swearIndex].pages = pages;
-		}
+const pageTimer = setInterval(() => {
+	if(pageQueue.length) {
+		const query = pageQueue[0];
+		pageQueue.shift();
 
-		const code = result.data.items;
-		for(file of code) {
-			const extension = path.extname(file.path);
-			if(!languages[extension]) {
-				languages[extension] = {};
+		console.log(`Continuing search for ${query.language} files containing "${query.word}" on page ${query.nextPage}.`);
+
+		github.search.code({
+			q: `${query.word} in:file language:${query.language}`,
+			per_page: 100,
+			page: query.nextPage
+		}).then(result => {
+			if(result.meta.link && Number(result.meta.link.split(";")[0].split("&page=")[1].split("&")[0])) {
+				const nextPage = Number(result.meta.link.split(";")[0].split("&page=")[1].split("&")[0]); // Hacky, but works.
+				pageQueue.push({
+					word: query.word,
+					language: query.language,
+					nextPage: nextPage
+				});
 			}
-			if(!languages[extension][swear.word]) {
-				languages[extension][swear.word] = 0;
+
+			for(file of result.data.items) {
+				contentQueue.push({
+					word: query.word,
+					language: query.language,
+					repo: file.repository.name,
+					owner: file.repository.owner.login,
+					path: file.path
+				});
 			}
+		}).catch(err => {
+			if(err.message.includes("abuse detection mechanism")) {
+				console.log("GitHub API rate limit was exceeded. Requeuing query to search again later.")
+				pageQueue.unshift(query);
+			} else console.log(err);
+		});
+	}
+}, 4000);
 
-			languages[extension][swear.word] += 1;
-		}
+// GitHub's regular API requests are limited to 5,000 per hour or ~83 per minute.
+// Therefore, the contentTimer is run every second.
+// This makes a total of 60 API requests per minute.
 
-		if(swears[swearIndex].pageNumber === swears[swearIndex].pages) {
-			console.log(`Ending search for swear word "${swears[swearIndex].word}."`);
-			swearIndex += 1;
-			console.log(`Starting next search for swear word "${swears[swearIndex].word} on page 1."`);
-		} else {
-			swears[swearIndex].pageNumber += 1;
-			console.log(`Continuing search for swear word "${swears[swearIndex].word}" on page ${swears[swearIndex].pageNumber}.`);
-		}
-	}).catch(err => console.error);
-}, 2000);
+const contentTimer = setInterval(() => {
+	if(contentQueue.length) {
+		const query = contentQueue[0];
+		contentQueue.shift();
+
+		console.log(`Searching ${query.language} file content for instances of "${query.word}."`);
+
+		github.repos.getContent({
+			owner: query.owner,
+			repo: query.repo,
+			path: query.path
+		}).then(result => {
+			const content = new Buffer(result.data.content, "base64").toString("utf8");
+
+			if(!results[query.language]) {
+				results[query.language] = {};
+			}
+			if(!results[query.language][query.word]) {
+				results[query.language][query.word] = 0;
+			}
+			results[query.language][query.word] += (content.match(new RegExp(query.word, "g")) || []).length;
+		}).catch(err => {
+			if(err.message.includes("abuse detection mechanism")) {
+				console.log("GitHub API rate limit was exceeded. Requeuing query to search again later.")
+				contentQueue.unshift(query);
+			}
+			else console.log(err);
+		});
+	}
+}, 1000);
 
 death((signal, err) => {
 	console.log("Searching has been stopped. Please wait while results are stored...");
-	jsonFile.writeFile("./results.json", languages, err => {
+	jsonFile.writeFile("./results.json", JSON.stringify(results, null, 4), err => {
 		if(err) console.error(err);
 		process.exit();
-	});
+	})
 });

@@ -64,7 +64,7 @@ const rateLimiter = setInterval(() => {
 		if(swears[swearIndex].pageNumber === swears[swearIndex].pages) {
 			console.log(`Ending search for swear word "${swears[swearIndex].word}."`);
 			swearIndex += 1;
-			console.log(`Starting next search for swear word "${swears[swearIndex].word} on page 1."`);
+			console.log(`Starting next search for swear word "${swears[swearIndex].word}" on page 1.`);
 		} else {
 			swears[swearIndex].pageNumber += 1;
 			console.log(`Continuing search for swear word "${swears[swearIndex].word}" on page ${swears[swearIndex].pageNumber}.`);

@@ -28,7 +28,7 @@ for(swear of swears) {
 	}
 }
 
-function isMemoryAvailable() {
+function memoryIsAvailable() {
 	return os.freemem() >= 150000000;
 }
 
@@ -39,7 +39,7 @@ console.log(`Searching will begin now.`);
 // This makes a total of 30 API requests per minute.
 
 const baseTimer = setInterval(() => {
-	if(isMemoryAvailable()) {
+	if(memoryIsAvailable()) {
 		if(baseQueue.length) {
 			const query = baseQueue[0];
 			baseQueue.shift();
@@ -80,7 +80,7 @@ const baseTimer = setInterval(() => {
 }, 4000);
 
 const pageTimer = setInterval(() => {
-	if(isMemoryAvailable()) {
+	if(memoryIsAvailable()) {
 		if(pageQueue.length) {
 			const query = pageQueue[0];
 			pageQueue.shift();
@@ -125,7 +125,7 @@ const pageTimer = setInterval(() => {
 // This makes a total of 60 API requests per minute.
 
 const contentTimer = setInterval(() => {
-	if(isMemoryAvailable()) {
+	if(memoryIsAvailable()) {
 		if(contentQueue.length) {
 			const query = contentQueue[0];
 			contentQueue.shift();

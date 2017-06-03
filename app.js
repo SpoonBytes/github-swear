@@ -45,6 +45,7 @@ function crawl(query, pageNumber) {
 		sort: "indexed"
 	})
 	.then(results => {
+		for (file of results.data.items) {
 			contentQueue.push({
 				phrase: query.phrase,
 				language: query.language,
@@ -52,6 +53,7 @@ function crawl(query, pageNumber) {
 				owner: file.repository.owner.login,
 				path: file.path
 			});
+		}
 		if (!readingStarted) {
 			readFile(contentQueue.shift());
 			readingStarted = true;

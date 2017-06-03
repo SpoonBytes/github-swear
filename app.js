@@ -52,7 +52,6 @@ function crawl(query, pageNumber) {
 				owner: file.repository.owner.login,
 				path: file.path
 			});
-		}
 		if (!readingStarted) {
 			readFile(contentQueue.shift());
 			readingStarted = true;

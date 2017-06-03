@@ -2,7 +2,7 @@ const os = require("os");
 const fs = require("fs");
 const path = require("path");
 const GitHubApi = require("github");
-const jsonFile = require('jsonfile');
+const restify = require("restify");
 
 const credentials = require("./credentials.json");
 let github = new GitHubApi();
@@ -15,7 +15,7 @@ github.authenticate({
 const languages = fs.readFileSync("languages.txt").toString().split("\n");
 const swears = fs.readFileSync("swears.txt").toString().split("\n");
 const memoryTimeout = 4000; // ms to wait for memory to be freed
-const pageLimit = 1; // Number of pages to go through for each language before quitting
+const pageLimit = 10; // Number of pages to go through for each language before quitting
 let readingStarted = false;
 let baseQueue = [];
 const contentQueue = [];
@@ -29,8 +29,6 @@ for (language of languages) {
 	}
 }
 let memoryAvailable = () => os.freemem() <= os.totalmem() * .80;
-
-baseQueue.splice(0, 74); // DEBUGGING
 
 crawl(baseQueue.shift(), 1);
 
@@ -85,6 +83,7 @@ function crawl(query, pageNumber) {
 }
 
 let swearSearch = new RegExp(swears.join("|"), "gi");
+let server = restify.createStringClient({url: "http://localhost:8080"});
 
 function readFile(file) {
 	if (!memoryAvailable()) {
@@ -99,7 +98,7 @@ function readFile(file) {
 	.then(result => {
 		const content = new Buffer(result.data.content, "base64").toString("utf8");
 		let numSwears = content.match(swearSearch).length;
-		console.log(file.language, numSwears);
+		server.get(`/report/${file.language}/${numSwears}`, () => {});
 		if (!contentQueue.length) {
 			readingStarted = false; // Other loop will start another read eventually
 		}

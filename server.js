@@ -42,3 +42,7 @@ server.get("/", (req, res, next) => {
 });
 
 server.listen(8080);
+
+setInterval(() => {
+	fs.writeFile(`${metrics.started}.json`, JSON.stringify(metrics, null, 2), (err) => {});
+}, 60000);

@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A simple crawler bot to gather data from GitHub to find the correlation between programming language and the number of obscenities used.",
   "main": "app.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node app.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SpoonBytes/github-swear.git"
@@ -13,13 +15,9 @@
   "bugs": {
     "url": "https://github.com/SpoonBytes/github-swear/issues"
   },
-  "scripts": {
-    "start": "node app.js"
-  },
   "homepage": "https://github.com/SpoonBytes/github-swear#readme",
   "dependencies": {
-    "death": "^1.1.0",
     "github": "^9.2.0",
-    "jsonfile": "^3.0.0"
+    "restify": "^4.3.0"
   }
 }

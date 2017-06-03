@@ -45,7 +45,6 @@ function crawl(query, pageNumber) {
 		sort: "indexed"
 	})
 	.then(results => {
-		for (file of results.data.items) {
 			contentQueue.push({
 				phrase: query.phrase,
 				language: query.language,

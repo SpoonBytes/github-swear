@@ -64,8 +64,7 @@ function readFile(file) {
 			setTimeout(readFile, retryAfter * 1000, file); 
 		} else {
 			console.log(err);
-			console.log("TRYING AGAIN!");
-			setTimeout(readFile, retryTimeout, file);
+			setTimeout(readFile, retryTimeout, contentQueue.shift());
 		}
 	});
 }

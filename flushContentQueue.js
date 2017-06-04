@@ -52,16 +52,15 @@ function readFile(file) {
 	.catch(err => {
 		if (err.message.includes("rate limit exceeded")) {
 			let resetTimestamp = err.headers["x-ratelimit-reset"];
-			console.log("RESET TIMESTAMP:", resetTimestamp);
 			let currentTimestamp = Date.now() / 1000;
 			let retryAfter = resetTimestamp - currentTimestamp;
-			console.log(`RATE LIMIT! RETRYING AFTER ${retryAfter}s - QUERY: ${query.phrase} PAGE: ${pageNumber}`);
+			console.log(`RATE LIMIT! RETRYING AFTER ${retryAfter}s - FILE: ${file.path}`);
 			setTimeout(readFile, retryAfter * 1000, file);
 			return;
 		}
 		if (err.message.includes("abuse detection mechanism")) {
 			let retryAfter = err.headers["retry-after"];
-			console.log(`ABUSE DETECTION! RETRYING AFTER ${retryAfter}s - QUERY: ${query.phrase} PAGE: ${pageNumber}`)
+			console.log(`ABUSE DETECTION! RETRYING AFTER ${retryAfter}s - FILE: ${file.path}`)
 			setTimeout(readFile, retryAfter * 1000, file); 
 		} else {
 			console.log(err);

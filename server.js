@@ -10,6 +10,7 @@ var metrics = {
 	started: + new Date(),
 	lastUpdated: + new Date(),
 	currentTimestamp: + new Date(),
+	remaining: 0
 };
 function updateMetrics() {
 	metrics.memory = {
@@ -28,10 +29,17 @@ for (language of languages) {
  
 server.use(restify.bodyParser());
 
+server.get("/setRemaining/:remaining", (req, res, next) => {
+	if (req.connection.remoteAddress != "::ffff:127.0.0.1" && req.connection.remoteAddress != "::1") return res.end();
+	metrics.remaining = req.params.remaining;
+	res.end();
+});
+
 server.get("/report/:language/:swears", (req, res, next) => {
 	if (req.connection.remoteAddress != "::ffff:127.0.0.1" && req.connection.remoteAddress != "::1") return res.end();
 	metrics.languages[req.params.language].push(req.params.swears);
 	metrics.lastUpdated = + new Date();
+	metrics.remaining--;
 	res.end();
 });
 

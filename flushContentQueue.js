@@ -37,6 +37,7 @@ function readFile(file) {
 	.then(result => {
 		const content = new Buffer(result.data.content, "base64").toString("utf8");
 		let numSwears = content.match(swearSearch).length;
+		if (file.language == "C#") file.language = "C%23";
 		server.get(`/report/${file.language}/${numSwears}`, () => {});
 		if (!contentQueue.length) {
 			console.log("DONE");

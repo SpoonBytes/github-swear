@@ -4,7 +4,7 @@
   "description": "A simple crawler bot to gather data from GitHub to find the correlation between programming language and the number of obscenities used.",
   "main": "app.js",
   "scripts": {
-    "start": "node server.js & node flushContentQueue.js"
+    "start": "node generateFiveNumberSummary.js"
   },
   "repository": {
     "type": "git",

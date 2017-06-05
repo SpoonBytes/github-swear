@@ -1,0 +1,122 @@
+{
+  "JavaScript": {
+    "min": 1,
+    "q1": 1,
+    "median": 5.5,
+    "q3": 4,
+    "max": 383,
+    "iqr": 3
+  },
+  "Java": {
+    "min": 1,
+    "q1": 1,
+    "median": 5.5,
+    "q3": 4,
+    "max": 173,
+    "iqr": 3
+  },
+  "Python": {
+    "min": 1,
+    "q1": 1,
+    "median": 11,
+    "q3": 4,
+    "max": 1004,
+    "iqr": 3
+  },
+  "Ruby": {
+    "min": 1,
+    "q1": 1,
+    "median": 11,
+    "q3": 4,
+    "max": 3966,
+    "iqr": 3
+  },
+  "PHP": {
+    "min": 1,
+    "q1": 1,
+    "median": 11,
+    "q3": 4,
+    "max": 1498,
+    "iqr": 3
+  },
+  "C++": {
+    "min": 1,
+    "q1": 1,
+    "median": 11,
+    "q3": 5,
+    "max": 628,
+    "iqr": 4
+  },
+  "CSS": {
+    "min": 1,
+    "q1": 1,
+    "median": 11,
+    "q3": 4,
+    "max": 408,
+    "iqr": 3
+  },
+  "C#": {
+    "min": 1,
+    "q1": 1,
+    "median": 11,
+    "q3": 5,
+    "max": 170,
+    "iqr": 4
+  },
+  "C": {
+    "min": 1,
+    "q1": 1,
+    "median": 5.5,
+    "q3": 2,
+    "max": 42,
+    "iqr": 1
+  },
+  "Go": {
+    "min": 1,
+    "q1": 1,
+    "median": 5.5,
+    "q3": 3,
+    "max": 142,
+    "iqr": 2
+  },
+  "Shell": {
+    "min": 1,
+    "q1": 1,
+    "median": 11,
+    "q3": 2,
+    "max": 178,
+    "iqr": 1
+  },
+  "Objective-C": {
+    "min": 1,
+    "q1": 1,
+    "median": 5.5,
+    "q3": 1,
+    "max": 887,
+    "iqr": 0
+  },
+  "Scala": {
+    "min": 1,
+    "q1": 1,
+    "median": 11,
+    "q3": 3,
+    "max": 166,
+    "iqr": 2
+  },
+  "Swift": {
+    "min": 1,
+    "q1": 1,
+    "median": 5.5,
+    "q3": 4,
+    "max": 184,
+    "iqr": 3
+  },
+  "TypeScript": {
+    "min": 1,
+    "q1": 1,
+    "median": 11,
+    "q3": 3,
+    "max": 321,
+    "iqr": 2
+  }
+}

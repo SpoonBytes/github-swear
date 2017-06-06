@@ -29,7 +29,6 @@ for (language in results) {
 		confidenceInterval: [mean - marginOfError, mean + marginOfError]
 	}
 	let s = summaries[language];
-	console.log(language, s.min, s.q1, s.q3, s.max);
 }
 
 fs.writeFileSync("summaries.json", JSON.stringify(summaries, null, 2), (err) => {});

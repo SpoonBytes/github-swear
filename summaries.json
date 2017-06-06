@@ -2,121 +2,226 @@
   "JavaScript": {
     "min": 1,
     "q1": 1,
-    "median": 5.5,
+    "median": 1,
     "q3": 4,
     "max": 383,
-    "iqr": 3
+    "iqr": 3,
+    "stdDev": 17.577744451436292,
+    "mean": 6.45,
+    "marginOfError": 0.6890475824963026,
+    "confidenceInterval": [
+      5.760952417503698,
+      7.1390475824963024
+    ]
   },
   "Java": {
     "min": 1,
     "q1": 1,
-    "median": 5.5,
+    "median": 1,
     "q3": 4,
     "max": 173,
-    "iqr": 3
+    "iqr": 3,
+    "stdDev": 13.733022035954058,
+    "mean": 5.2476,
+    "marginOfError": 0.538334463809399,
+    "confidenceInterval": [
+      4.7092655361906015,
+      5.785934463809399
+    ]
   },
   "Python": {
     "min": 1,
     "q1": 1,
-    "median": 11,
+    "median": 2,
     "q3": 4,
     "max": 1004,
-    "iqr": 3
+    "iqr": 3,
+    "stdDev": 38.83243160864384,
+    "mean": 8.0256,
+    "marginOfError": 1.5222313190588384,
+    "confidenceInterval": [
+      6.503368680941162,
+      9.547831319058838
+    ]
   },
   "Ruby": {
     "min": 1,
     "q1": 1,
-    "median": 11,
+    "median": 2,
     "q3": 4,
     "max": 3966,
-    "iqr": 3
+    "iqr": 3,
+    "stdDev": 82.29364928984495,
+    "mean": 8.1284,
+    "marginOfError": 3.225911052161922,
+    "confidenceInterval": [
+      4.902488947838077,
+      11.354311052161922
+    ]
   },
   "PHP": {
     "min": 1,
     "q1": 1,
-    "median": 11,
+    "median": 2,
     "q3": 4,
     "max": 1498,
-    "iqr": 3
+    "iqr": 3,
+    "stdDev": 53.63336431886406,
+    "mean": 6.4572,
+    "marginOfError": 2.1024278812994712,
+    "confidenceInterval": [
+      4.354772118700529,
+      8.559627881299471
+    ]
   },
   "C++": {
     "min": 1,
     "q1": 1,
-    "median": 11,
+    "median": 2,
     "q3": 5,
     "max": 628,
-    "iqr": 4
+    "iqr": 4,
+    "stdDev": 26.224013654663924,
+    "mean": 7.2472,
+    "marginOfError": 1.0279813352628258,
+    "confidenceInterval": [
+      6.219218664737174,
+      8.275181335262825
+    ]
   },
   "CSS": {
     "min": 1,
     "q1": 1,
-    "median": 11,
+    "median": 2,
     "q3": 4,
     "max": 408,
-    "iqr": 3
+    "iqr": 3,
+    "stdDev": 9.261370015283912,
+    "mean": 3.2388,
+    "marginOfError": 0.3630457045991294,
+    "confidenceInterval": [
+      2.8757542954008706,
+      3.6018457045991292
+    ]
   },
   "C#": {
     "min": 1,
     "q1": 1,
-    "median": 11,
+    "median": 2,
     "q3": 5,
     "max": 170,
-    "iqr": 4
+    "iqr": 4,
+    "stdDev": 13.10742140926279,
+    "mean": 5.348,
+    "marginOfError": 0.5138109192431014,
+    "confidenceInterval": [
+      4.834189080756898,
+      5.861810919243101
+    ]
   },
   "C": {
     "min": 1,
     "q1": 1,
-    "median": 5.5,
+    "median": 1,
     "q3": 2,
     "max": 42,
-    "iqr": 1
+    "iqr": 1,
+    "stdDev": 6.539752790434827,
+    "mean": 2.6812,
+    "marginOfError": 0.2563583093850452,
+    "confidenceInterval": [
+      2.424841690614955,
+      2.9375583093850453
+    ]
   },
   "Go": {
     "min": 1,
     "q1": 1,
-    "median": 5.5,
+    "median": 1,
     "q3": 3,
     "max": 142,
-    "iqr": 2
+    "iqr": 2,
+    "stdDev": 9.917814041410526,
+    "mean": 3.7908,
+    "marginOfError": 0.38877831042329264,
+    "confidenceInterval": [
+      3.4020216895767073,
+      4.179578310423293
+    ]
   },
   "Shell": {
     "min": 1,
     "q1": 1,
-    "median": 11,
+    "median": 2,
     "q3": 2,
     "max": 178,
-    "iqr": 1
+    "iqr": 1,
+    "stdDev": 20.163199345342004,
+    "mean": 5.2596,
+    "marginOfError": 0.7903974143374065,
+    "confidenceInterval": [
+      4.469202585662593,
+      6.0499974143374065
+    ]
   },
   "Objective-C": {
     "min": 1,
     "q1": 1,
-    "median": 5.5,
+    "median": 1,
     "q3": 1,
     "max": 887,
-    "iqr": 0
+    "iqr": 0,
+    "stdDev": 21.142126632862645,
+    "mean": 3.2012,
+    "marginOfError": 0.8287713640082157,
+    "confidenceInterval": [
+      2.3724286359917843,
+      4.029971364008215
+    ]
   },
   "Scala": {
     "min": 1,
     "q1": 1,
-    "median": 11,
+    "median": 2,
     "q3": 3,
     "max": 166,
-    "iqr": 2
+    "iqr": 2,
+    "stdDev": 8.332494310829144,
+    "mean": 3.4816,
+    "marginOfError": 0.32663377698450247,
+    "confidenceInterval": [
+      3.1549662230154976,
+      3.808233776984502
+    ]
   },
   "Swift": {
     "min": 1,
     "q1": 1,
-    "median": 5.5,
+    "median": 1,
     "q3": 4,
     "max": 184,
-    "iqr": 3
+    "iqr": 3,
+    "stdDev": 13.941290907229492,
+    "mean": 5.0028,
+    "marginOfError": 0.5464986035633961,
+    "confidenceInterval": [
+      4.456301396436603,
+      5.549298603563396
+    ]
   },
   "TypeScript": {
     "min": 1,
     "q1": 1,
-    "median": 11,
+    "median": 2,
     "q3": 3,
     "max": 321,
-    "iqr": 2
+    "iqr": 2,
+    "stdDev": 25.99422940269626,
+    "mean": 6.8424,
+    "marginOfError": 1.0189737925856934,
+    "confidenceInterval": [
+      5.823426207414306,
+      7.8613737925856935
+    ]
   }
 }

@@ -2,7 +2,6 @@ var results = require("./results");
 const fs = require("fs");
 let arr = require("./arr-stat");
 
-
 for (language in results) {
 	let newResults = [];
 	for (i in results[language]) {
@@ -11,4 +10,8 @@ for (language in results) {
 	results[language] = newResults;
 }
 
-fs.writeFileSync("results-capped.json", JSON.stringify(results, null, 2), (err) => {});
+fs.writeFileSync(
+	"results-capped.json",
+	JSON.stringify(results, null, 2),
+	err => {}
+);

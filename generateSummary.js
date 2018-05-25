@@ -11,7 +11,7 @@ for (language in results) {
 	samples = samples.map(Number);
 	let half = Math.floor(samples.length / 2);
 	let q1 = samples[Math.floor(half / 2)];
-	let q3 = samples[Math.floor(samples.length - (half / 2))];
+	let q3 = samples[Math.floor(samples.length - half / 2)];
 	let stdDev = arr.standardDeviation(samples);
 	let stdError = stdDev / Math.sqrt(samples.length);
 	let mean = arr.mean(samples);
@@ -27,8 +27,12 @@ for (language in results) {
 		mean: mean,
 		marginOfError: marginOfError,
 		confidenceInterval: [mean - marginOfError, mean + marginOfError]
-	}
+	};
 	let s = summaries[language];
 }
 
-fs.writeFileSync("summaries.json", JSON.stringify(summaries, null, 2), (err) => {});
+fs.writeFileSync(
+	"summaries.json",
+	JSON.stringify(summaries, null, 2),
+	err => {}
+);

@@ -16,11 +16,11 @@ for (language in results) {
 		"9": 0,
 		"10": 0,
 		"11+": 0
-	}
+	};
 	let samples = results[language];
 	for (i in samples) {
 		let sample = samples[i];
-		switch(+sample) {
+		switch (+sample) {
 			case 1:
 				swearsPerFile[language]["1"]++;
 				break;
@@ -58,4 +58,8 @@ for (language in results) {
 	}
 }
 
-fs.writeFile("swearsPerFile.json", JSON.stringify(swearsPerFile, null, 2), (err) => {});
+fs.writeFile(
+	"swearsPerFile.json",
+	JSON.stringify(swearsPerFile, null, 2),
+	err => {}
+);
